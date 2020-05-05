@@ -4,7 +4,7 @@
   align-items: center;
 }
 
-.Login {
+.Signup {
   display: flex;
   flex-direction: column;
   padding: 1rem;
@@ -16,23 +16,23 @@
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
-.Login div {
+.Signup div {
   display: flex;
   align-items: center;
   margin-top: 0.4rem;
 }
-.Login div label {
+.Signup div label {
   flex-basis: 30%;
 }
-.Login div input {
+.Signup div input {
   flex-basis: 70%;
 }
 
-.Login input[type='submit'] {
+.Signup input[type='submit'] {
   margin-top: 0.6rem;
 }
 
-.Login .message {
+.Signup .message {
   padding: 0 1rem;
   font-size: 0.8rem;
   margin-top: 1rem;

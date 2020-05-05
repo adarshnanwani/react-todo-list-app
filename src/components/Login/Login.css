@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Login {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  min-width: 400px;
+  max-width: 450px;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+.Login div {
+  display: flex;
+  align-items: center;
+  margin-top: 0.4rem;
+}
+.Login div label {
+  flex-basis: 30%;
+}
+.Login div input {
+  flex-basis: 70%;
+}
+
+input[type='submit'] {
+  margin-top: 0.6rem;
+}

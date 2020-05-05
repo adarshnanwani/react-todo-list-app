@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import useInput from '../../hooks/useInput';
 
@@ -10,18 +10,25 @@ const Signup = () => {
   const [password, changePassword, resetPassword] = useInput('');
   const [cpassword, changeCpassword, resetCpassword] = useInput('');
 
+  const [error, setError] = useState(false);
+
   const formSubmitHandler = (e) => {
     e.preventDefault();
-    console.log({
-      name,
-      email,
-      password,
-      cpassword,
-    });
-    resetName();
-    resetEmail();
-    resetPassword();
-    resetCpassword();
+    if (password !== cpassword) {
+      setError(true);
+    } else {
+      console.log({
+        name,
+        email,
+        password,
+        cpassword,
+      });
+      setError(false);
+      resetName();
+      resetEmail();
+      resetPassword();
+      resetCpassword();
+    }
   };
 
   return (
@@ -54,6 +61,12 @@ const Signup = () => {
             onChange={changeCpassword}
           />
         </div>
+        {error && (
+          <div className='error-msg'>
+            Password and Confirm Password do not match.
+          </div>
+        )}
+
         <input type='submit' value='Signup' />
         <div className='message'>
           <span>

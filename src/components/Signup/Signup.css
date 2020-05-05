@@ -37,3 +37,10 @@
   font-size: 0.8rem;
   margin-top: 1rem;
 }
+
+.Signup .error-msg {
+  font-size: 0.8rem;
+  color: red;
+  padding: 0 1rem;
+  margin-top: 0px;
+}

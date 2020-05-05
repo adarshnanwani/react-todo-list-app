@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import Navbar from './components/Layout/Navbar';
+import Footer from './components/Layout/Footer';
 import './App.css';
 
 function App() {
   return (
-    <div className='App'>
-      <h2>React Todo List</h2>
-    </div>
+    <Fragment>
+      <Navbar />
+      <section className='container'></section>
+      <Footer />
+    </Fragment>
   );
 }
 

@@ -68,6 +68,11 @@ h3 {
 }
 
 /* Layout Styles*/
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
 .navbar {
   position: fixed;
   display: flex;
@@ -95,6 +100,7 @@ h3 {
   margin: auto;
   margin-top: 4rem;
   padding: 0.8rem 2rem;
+  flex: 1;
 }
 
 footer {

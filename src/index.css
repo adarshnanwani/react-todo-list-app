@@ -39,6 +39,7 @@ input[type='submit'],
   display: inline-block;
   outline: none;
   cursor: pointer;
+  font-weight: bold;
 }
 input[type='submit']:hover,
 .button:hover {
@@ -72,6 +73,17 @@ h3 {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  background: #5614b0; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #dbd65c,
+    #5614b0
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #dbd65c,
+    #5614b0
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .navbar {
   position: fixed;
@@ -85,6 +97,11 @@ h3 {
   padding: 0.6rem 1.2rem;
   border-bottom: 2px solid rgba(0, 0, 0, 0.2);
   box-shadow: 5px 0px 5px rgba(0, 0, 0, 0.2);
+  background: #eee;
+}
+
+.navbar a:hover {
+  color: var(--primary);
 }
 
 .navbar ul {
@@ -106,5 +123,6 @@ h3 {
 footer {
   padding: 0.6rem 1.2rem;
   height: 3rem;
+  background: #eee;
   border-top: 2px solid rgba(0, 0, 0, 0.2);
 }

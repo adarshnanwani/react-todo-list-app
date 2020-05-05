@@ -16,7 +16,7 @@ const Login = (props) => {
           <input type='password' id='password' />
         </div>
         <input type='submit' value='Login' />
-        <div class='message'>
+        <div className='message'>
           <span>
             Don't have an account? Click <Link to='/signup'>here</Link> to sign
             up.

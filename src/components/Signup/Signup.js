@@ -24,7 +24,7 @@ const Signup = () => {
           <input type='password' id='cpassword' />
         </div>
         <input type='submit' value='Signup' />
-        <div class='message'>
+        <div className='message'>
           <span>
             Already have an account? Click <Link to='/'>here</Link> to login.
           </span>

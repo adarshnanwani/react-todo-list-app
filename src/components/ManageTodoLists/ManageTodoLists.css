@@ -1,0 +1,9 @@
+.ManageTodoLists {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
+}
+.ManageTodoLists h3 {
+  text-align: center;
+}

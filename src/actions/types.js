@@ -1,10 +1,13 @@
 // User action types
-export const SIGN_UP = 'SIGN_UP';
-export const LOGIN = 'LOGIN';
+export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
+export const SIGN_UP_FAIL = 'SIGN_UP_FAIL';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
 export const RESET_PASSWORD = 'RESET_PASSWORD';
 export const GET_USER_DATA = 'GET_USER_DATA';
 export const SET_USER_DATA = 'SET_USER_DATA';
+export const LOGOUT = 'LOGOUT';
 
 // Todo Lists action types
 export const ADD_TODO_LIST = 'ADD_TODO_LIST';

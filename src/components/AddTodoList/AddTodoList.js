@@ -9,9 +9,10 @@ const AddTodoList = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // Call a function to save todo list
-    props.addTodoList(name);
-    resetName();
+    if (name !== '') {
+      props.addTodoList(name);
+      resetName();
+    }
   };
   return (
     <div className='AddTodoList'>

@@ -9,20 +9,31 @@ const ManageTodoLists = (props) => {
   if (props.todolists.length === 0) {
     list = <li>Please add a todo list.</li>;
   } else {
-    list = props.todolists.map((list) => (
-      <li key={list._id}>
-        <span>{list.name}</span> -{' '}
-        <Moment format='DD/MMM/YYYY'>{list.createdDate.toString()}</Moment>
-        <button className='button'>Open</button>
-        <button className='button'>Share</button>
-        <button
-          className='button'
-          onClick={() => props.deleteTodoList(list._id)}
-        >
-          Delete
-        </button>
-      </li>
-    ));
+    list = props.todolists.map((list) => {
+      let listName = list.name;
+
+      if (list.name.length > 10) {
+        listName = list.name.substr(0, 10) + '...';
+      }
+      return (
+        <li key={list._id}>
+          <div>
+            <span>{listName}</span> -{' '}
+            <Moment format='DD/MMM/YYYY'>{list.createdDate.toString()}</Moment>
+          </div>
+          <div className='action-area'>
+            <button className='button'>Open</button>
+            <button className='button'>Share</button>
+            <button
+              className='button'
+              onClick={() => props.deleteTodoList(list._id)}
+            >
+              Delete
+            </button>
+          </div>
+        </li>
+      );
+    });
   }
   return (
     <div className='ManageTodoLists'>

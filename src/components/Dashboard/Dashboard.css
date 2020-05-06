@@ -1,0 +1,25 @@
+#root {
+  background: #fff;
+}
+
+.Dashboard {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 2fr 2fr;
+  grid-template-areas:
+    'add-todo add-todo-list'
+    'todo-list master-todo-list';
+}
+
+.add-todo {
+  grid-area: add-todo;
+}
+.add-todo-list {
+  grid-area: add-todo-list;
+}
+.todo-list {
+  grid-area: todo-list;
+}
+.master-todo-list {
+  grid-area: master-todo-list;
+}

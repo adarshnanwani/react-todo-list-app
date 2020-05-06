@@ -4,6 +4,7 @@ import Navbar from './components/Layout/Navbar';
 import Footer from './components/Layout/Footer';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
+import Dashboard from './components/Dashboard/Dashboard';
 import './App.css';
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
         <Switch>
           <Route path='/' exact component={Login} />
           <Route path='/signup' component={Signup} />
-          <Route path='/dashboard' component={() => <h4>Dashboard</h4>} />
+          <Route path='/dashboard' component={Dashboard} />
         </Switch>
       </section>
       <Footer />

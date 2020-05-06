@@ -1,0 +1,28 @@
+.AddTodoItem {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 100%;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
+}
+.AddTodoItem h3 {
+  text-align: center;
+}
+
+.AddTodoItem form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.AddTodoItem form div {
+  display: flex;
+  flex-direction: column;
+}
+.AddTodoItem input {
+  margin-top: 0.4rem;
+}
+.AddTodoItem input[type='submit'] {
+  margin-top: 0.7rem;
+}

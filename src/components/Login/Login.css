@@ -9,8 +9,8 @@
   flex-direction: column;
   background: rgba(255, 255, 255, 0.4);
   padding: 1rem;
-  min-width: 400px;
-  max-width: 450px;
+  min-width: 450px;
+  max-width: 500px;
   text-align: center;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 6px;
@@ -24,6 +24,8 @@
 }
 .Login div label {
   flex-basis: 30%;
+  text-align: right;
+  padding-right: 1rem;
 }
 .Login div input {
   flex-basis: 70%;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
+import { deleteTodoList } from '../../actions/todolist';
 import './ManageTodoLists.css';
 
 const ManageTodoLists = (props) => {
@@ -12,6 +13,14 @@ const ManageTodoLists = (props) => {
       <li key={list._id}>
         <span>{list.name}</span> -{' '}
         <Moment format='DD/MMM/YYYY'>{list.createdDate.toString()}</Moment>
+        <button className='button'>Open</button>
+        <button className='button'>Share</button>
+        <button
+          className='button'
+          onClick={() => props.deleteTodoList(list._id)}
+        >
+          Delete
+        </button>
       </li>
     ));
   }
@@ -27,4 +36,4 @@ const mapStateToProps = (state) => ({
   todolists: state.todolists,
 });
 
-export default connect(mapStateToProps)(ManageTodoLists);
+export default connect(mapStateToProps, { deleteTodoList })(ManageTodoLists);

@@ -1,4 +1,4 @@
-import { ADD_TODO_LIST } from './types';
+import { ADD_TODO_LIST, DELETE_TODO_LIST } from './types';
 import { v4 } from 'uuid';
 
 export const addTodoList = (name) => (dispatch) => {
@@ -12,3 +12,10 @@ export const addTodoList = (name) => (dispatch) => {
     payload: newTodoList,
   });
 };
+
+export const deleteTodoList = (_id) => (dispatch) => {
+  dispatch({
+    type:DELETE_TODO_LIST,
+    payload: _id
+  })
+}

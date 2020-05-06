@@ -72,7 +72,7 @@ h3 {
 #root {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   background: #5614b0; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,

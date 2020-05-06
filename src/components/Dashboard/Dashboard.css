@@ -11,12 +11,12 @@
   display: grid;
   height: 100%;
   width: 100%;
-  grid-template-rows: 1fr 2fr;
+  grid-template-rows: 200px 1fr;
   grid-template-columns: 2fr 1fr 2fr;
   grid-template-areas:
     'add-todo . add-todo-list'
     'todo-list . master-todo-list';
-  gap: 20px 0;
+  gap: 40px 0;
 }
 
 .add-todo {

@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import useInput from '../../hooks/useInput';
+import { userLogin } from '../../actions/user';
 import './Login.css';
 
 const Login = (props) => {
@@ -13,6 +15,7 @@ const Login = (props) => {
       email,
       password,
     });
+    props.userLogin(email, password);
     resetEmail();
     resetPassword();
   };
@@ -46,4 +49,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default connect(null, { userLogin })(Login);

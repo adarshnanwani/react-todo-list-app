@@ -10,21 +10,22 @@ import {
   LOGOUT,
 } from './types';
 
-export const userSignUp = (dispatch) => {
+export const userSignUp = () => (dispatch) => {
   dispatch({
     type: SIGN_UP_SUCCESS,
-    token: '43524435ewrfdsgsafsdfas',
+    payload: '43524435ewrfdsgsafsdfas',
   });
 };
 
-export const userLogin = (dispatch) => {
+export const userLogin = (email, password) => (dispatch) => {
+  console.log('From User actions', email, password);
   dispatch({
     type: LOGIN_SUCCESS,
-    token: '43524435ewrfdsgsafsdfas',
+    payload: '43524435ewrfdsgsafsdfas',
   });
 };
 
-export const loadUser = (dispatch) => {
+export const loadUser = () => (dispatch) => {
   dispatch({
     type: GET_USER_DATA,
   });

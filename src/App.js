@@ -13,7 +13,8 @@ function App() {
       <section className='container'>
         <Switch>
           <Route path='/' exact component={Login} />
-          <Route path='/signup' exact component={Signup} />
+          <Route path='/signup' component={Signup} />
+          <Route path='/dashboard' component={() => <h4>Dashboard</h4>} />
         </Switch>
       </section>
       <Footer />

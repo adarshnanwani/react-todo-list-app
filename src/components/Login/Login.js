@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import useInput from '../../hooks/useInput';
 import { userLogin } from '../../actions/user';
@@ -19,6 +19,10 @@ const Login = (props) => {
     resetEmail();
     resetPassword();
   };
+
+  if (props.isAuthenticated) {
+    return <Redirect to='/dashboard' />;
+  }
 
   return (
     <div className='Login'>
@@ -49,4 +53,8 @@ const Login = (props) => {
   );
 };
 
-export default connect(null, { userLogin })(Login);
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.user.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { userLogin })(Login);

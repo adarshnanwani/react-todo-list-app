@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import Moment from 'react-moment';
 import { setSelectedTodoList } from '../../actions/selectedTodoList';
 import { deleteTodo, toggleTodo } from '../../actions/todolistitem';
+import TodoListItem from '../TodoListItem/TodoListItem';
 import './TodoList.css';
 
 const TodoList = (props) => {
@@ -12,6 +12,7 @@ const TodoList = (props) => {
     setSelected(e.target.value);
     props.setSelectedTodoList(e.target.value);
   };
+
   return (
     <div className='TodoList'>
       <div className='select-list'>
@@ -30,29 +31,11 @@ const TodoList = (props) => {
           {props.selectedTodoList.items &&
             props.selectedTodoList.items.map((item) => (
               <li key={item._id}>
-                <div>
-                  <span>{item.text}</span> -{' '}
-                  <Moment format='DD/MMM/YYYY'>
-                    {item.createdDate.toString()}
-                  </Moment>
-                </div>
-                <div className='action-area'>
-                  <button className='button' disabled={item.completed}>
-                    Edit
-                  </button>
-                  <button
-                    className='button'
-                    onClick={() => props.toggleTodo(item._id)}
-                  >
-                    {item.completed ? 'Open' : 'Complete'}
-                  </button>
-                  <button
-                    className='button'
-                    onClick={() => props.deleteTodo(item._id)}
-                  >
-                    Delete
-                  </button>
-                </div>
+                <TodoListItem
+                  item={item}
+                  toggleTodo={props.toggleTodo}
+                  deleteTodo={props.deleteTodo}
+                />
               </li>
             ))}
         </ul>

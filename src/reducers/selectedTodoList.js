@@ -1,6 +1,7 @@
 import {
   SET_SELECTED_TODO_LIST,
   ADD_TO_SELECTED_TODO_LIST,
+  DELETE_FROM_SELECTED_TODO_LIST,
 } from '../actions/types';
 
 const initialState = {
@@ -31,6 +32,11 @@ const selectedTodoListReducer = (state = initialState, action) => {
       return {
         ...state,
         items: [...state.items, action.payload],
+      };
+    case DELETE_FROM_SELECTED_TODO_LIST:
+      return {
+        ...state,
+        items: [...state.items].filter((item) => item._id !== action.payload),
       };
     default:
       return state;

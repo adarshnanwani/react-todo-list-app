@@ -31,13 +31,11 @@ export const deleteFromSelectedTodoList = (id) => (dispatch) => {
 };
 
 export const toggleSelectedTodoListItem = (id) => (dispatch, getState) => {
-  const todo = getState().selectedTodoList.items.find(
-    (item) => item._id === id
-  );
+  const items = [...getState().selectedTodoList.items];
+  const copyTodo = items.find((item) => item._id === id);
+  const todo = { ...copyTodo };
   todo.completed = !todo.completed;
-  const index = getState().selectedTodoList.items.findIndex(
-    (item) => item._id === id
-  );
+  const index = items.findIndex((item) => item._id === id);
   dispatch({
     type: TOGGLE_SELECTED_TODO_LIST_ITEM,
     payload: {

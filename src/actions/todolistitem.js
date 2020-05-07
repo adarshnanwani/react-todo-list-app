@@ -32,7 +32,8 @@ export const deleteTodo = (id) => (dispatch) => {
 };
 
 export const toggleTodo = (id) => (dispatch, getState) => {
-  const todo = getState().todoListItems.find((item) => item._id === id);
+  const copyTodo = getState().todoListItems.find((item) => item._id === id);
+  const todo = { ...copyTodo };
   todo.completed = !todo.completed;
   const index = getState().todoListItems.findIndex((item) => item._id === id);
   dispatch({

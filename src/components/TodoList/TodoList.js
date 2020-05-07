@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import Moment from 'react-moment';
 import { setSelectedTodoList } from '../../actions/selectedTodoList';
 import './TodoList.css';
 
@@ -27,7 +28,19 @@ const TodoList = (props) => {
         <ul>
           {props.selectedTodoList.items &&
             props.selectedTodoList.items.map((item) => (
-              <li key={item._id}> {item.text}</li>
+              <li key={item._id}>
+                <div>
+                  <span>{item.text}</span> -{' '}
+                  <Moment format='DD/MMM/YYYY'>
+                    {item.createdDate.toString()}
+                  </Moment>
+                </div>
+                <div className='action-area'>
+                  <button className='button'>Edit</button>
+                  <button className='button'>Complete</button>
+                  <button className='button'>Delete</button>
+                </div>
+              </li>
             ))}
         </ul>
       </div>

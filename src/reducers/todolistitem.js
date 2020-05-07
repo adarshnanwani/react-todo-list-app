@@ -1,4 +1,4 @@
-import { ADD_TODO, DELETE_TODO } from '../actions/types';
+import { ADD_TODO, DELETE_TODO, TOGGLE_TODO } from '../actions/types';
 
 const initialState = [];
 
@@ -8,6 +8,10 @@ const todoListItemsReducer = (state = initialState, action) => {
       return [...state, action.payload];
     case DELETE_TODO:
       return [...state].filter((todo) => todo._id !== action.payload);
+    case TOGGLE_TODO:
+      const copyState = [...state];
+      copyState.splice(action.payload.index, 1, action.payload.todo);
+      return copyState;
     default:
       return state;
   }

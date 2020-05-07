@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import { setSelectedTodoList } from '../../actions/selectedTodoList';
-import { deleteTodo } from '../../actions/todolistitem';
+import { deleteTodo, toggleTodo } from '../../actions/todolistitem';
 import './TodoList.css';
 
 const TodoList = (props) => {
@@ -37,8 +37,15 @@ const TodoList = (props) => {
                   </Moment>
                 </div>
                 <div className='action-area'>
-                  <button className='button'>Edit</button>
-                  <button className='button'>Complete</button>
+                  <button className='button' disabled={item.completed}>
+                    Edit
+                  </button>
+                  <button
+                    className='button'
+                    onClick={() => props.toggleTodo(item._id)}
+                  >
+                    {item.completed ? 'Open' : 'Complete'}
+                  </button>
                   <button
                     className='button'
                     onClick={() => props.deleteTodo(item._id)}
@@ -59,6 +66,8 @@ const mapStateToProps = (state) => ({
   selectedTodoList: state.selectedTodoList,
 });
 
-export default connect(mapStateToProps, { setSelectedTodoList, deleteTodo })(
-  TodoList
-);
+export default connect(mapStateToProps, {
+  setSelectedTodoList,
+  deleteTodo,
+  toggleTodo,
+})(TodoList);

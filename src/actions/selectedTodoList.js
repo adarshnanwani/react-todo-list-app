@@ -10,9 +10,10 @@ export const setSelectedTodoList = (id) => (dispatch, getState) => {
   const items = getState().todoListItems.filter(
     (item) => item.todoListId === id
   );
+  const name = { ...getState().todolists.find((item) => item._id === id) }.name;
   dispatch({
     type: SET_SELECTED_TODO_LIST,
-    payload: { id, items },
+    payload: { id, items, name },
   });
 };
 

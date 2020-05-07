@@ -8,6 +8,7 @@ import {
 
 const initialState = {
   id: '1',
+  name: 'Work',
   items: [
     {
       _id: '3',

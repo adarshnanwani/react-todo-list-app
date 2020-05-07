@@ -5,6 +5,7 @@ import Footer from './components/Layout/Footer';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
 import Dashboard from './components/Dashboard/Dashboard';
+import TodoList from './components/TodoList/TodoList';
 import './App.css';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path='/' exact component={Login} />
           <Route path='/signup' component={Signup} />
           <Route path='/dashboard' component={Dashboard} />
+          <Route path='/todolist/:todoListId' component={TodoList} />
         </Switch>
       </section>
       <Footer />

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
+import { Link } from 'react-router-dom';
 import { deleteTodoList } from '../../actions/todolist';
 import './ManageTodoLists.css';
 
@@ -22,7 +23,18 @@ const ManageTodoLists = (props) => {
             <Moment format='DD/MMM/YYYY'>{list.createdDate.toString()}</Moment>
           </div>
           <div className='action-area'>
-            <button className='button'>Open</button>
+            <Link
+              className='button'
+              to={{
+                pathname: `/todolist/${list._id}`,
+                user: {
+                  name: 'John',
+                  age: 25,
+                },
+              }}
+            >
+              Open
+            </Link>
             <button className='button'>Share</button>
             <button
               className='button'

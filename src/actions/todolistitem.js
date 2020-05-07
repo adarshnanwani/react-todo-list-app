@@ -1,5 +1,5 @@
-import { ADD_TODO } from './types';
 import { v4 } from 'uuid';
+import { ADD_TODO } from './types';
 
 export const addTodo = (text, todoListId) => (dispatch) => {
   const newTodo = {

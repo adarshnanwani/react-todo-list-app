@@ -1,0 +1,20 @@
+.TodoList {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 100%;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
+}
+
+.TodoList .select-list {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.TodoList .select-list label {
+  margin-right: 5px;
+}
+
+.TodoList h3 {
+  text-align: center;
+}

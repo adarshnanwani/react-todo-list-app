@@ -4,10 +4,17 @@ import { setSelectedTodoList } from '../../actions/selectedTodoList';
 import './TodoList.css';
 
 const TodoList = (props) => {
+  const [selected, setSelected] = useState(props.selectedTodoList.id);
+
+  const handleSelectChange = (e) => {
+    setSelected(e.target.value);
+    props.setSelectedTodoList(e.target.value);
+  };
   return (
     <div className='TodoList'>
-      <div>
-        <select>
+      <div className='select-list'>
+        <label>Todo List: </label>
+        <select value={selected} onChange={handleSelectChange}>
           {props.todolists.map((list) => (
             <option value={list._id} key={list._id}>
               {list.name}
@@ -17,6 +24,12 @@ const TodoList = (props) => {
       </div>
       <div className='list-container'>
         <h3>Todo List</h3>
+        <ul>
+          {props.selectedTodoList.items &&
+            props.selectedTodoList.items.map((item) => (
+              <li key={item._id}> {item.text}</li>
+            ))}
+        </ul>
       </div>
     </div>
   );

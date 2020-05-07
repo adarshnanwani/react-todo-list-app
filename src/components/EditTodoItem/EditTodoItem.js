@@ -16,7 +16,7 @@ const EditTodoItem = (props) => {
     <div className='EditTodoItem'>
       <form onSubmit={submitHandler}>
         <input type='text' value={text} onChange={changeText} />
-        <div>
+        <div className='buttons'>
           <input type='submit' value='Save' />
           <button onClick={props.toggleEdit} className='button' role='cancel'>
             Cancel

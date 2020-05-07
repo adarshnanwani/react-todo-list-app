@@ -19,6 +19,7 @@
 .AddTodoList form div {
   display: flex;
   flex-direction: column;
+  width: 80%;
 }
 .AddTodoList input {
   margin-top: 0.4rem;

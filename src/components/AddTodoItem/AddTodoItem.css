@@ -19,8 +19,15 @@
 .AddTodoItem form div {
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
+  width: 80%;
 }
-.AddTodoItem input {
+.AddTodoItem form div label {
+  text-align: left;
+  width: 100%;
+}
+.AddTodoItem input,
+.AddTodoItem select {
   margin-top: 0.4rem;
 }
 .AddTodoItem input[type='submit'] {

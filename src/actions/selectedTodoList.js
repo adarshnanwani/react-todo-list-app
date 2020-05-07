@@ -44,3 +44,21 @@ export const toggleSelectedTodoListItem = (id) => (dispatch, getState) => {
     },
   });
 };
+
+export const updateSelectedTodoListItem = (id, newText) => (
+  dispatch,
+  getState
+) => {
+  const items = [...getState().selectedTodoList.items];
+  const copyTodo = items.find((item) => item._id === id);
+  const todo = { ...copyTodo };
+  todo.text = newText;
+  const index = items.findIndex((item) => item._id === id);
+  dispatch({
+    type: UPDATE_SELECTED_TODO_LIST_ITEM,
+    payload: {
+      todo,
+      index,
+    },
+  });
+};

@@ -3,6 +3,7 @@ import {
   ADD_TO_SELECTED_TODO_LIST,
   DELETE_FROM_SELECTED_TODO_LIST,
   TOGGLE_SELECTED_TODO_LIST_ITEM,
+  UPDATE_SELECTED_TODO_LIST_ITEM,
 } from '../actions/types';
 
 const initialState = {
@@ -40,6 +41,7 @@ const selectedTodoListReducer = (state = initialState, action) => {
         items: [...state.items].filter((item) => item._id !== action.payload),
       };
     case TOGGLE_SELECTED_TODO_LIST_ITEM:
+    case UPDATE_SELECTED_TODO_LIST_ITEM:
       const copyItemsArr = [...state.items];
       copyItemsArr.splice(action.payload.index, 1, action.payload.todo);
       return {

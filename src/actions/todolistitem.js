@@ -1,9 +1,10 @@
 import { v4 } from 'uuid';
-import { ADD_TODO, DELETE_TODO, TOGGLE_TODO } from './types';
+import { ADD_TODO, DELETE_TODO, TOGGLE_TODO, UPDATE_TODO } from './types';
 import {
   addToSelectedTodoList,
   deleteFromSelectedTodoList,
   toggleSelectedTodoListItem,
+  updateSelectedTodoListItem,
 } from './selectedTodoList';
 
 export const addTodo = (text, todoListId) => (dispatch, getState) => {
@@ -32,10 +33,11 @@ export const deleteTodo = (id) => (dispatch) => {
 };
 
 export const toggleTodo = (id) => (dispatch, getState) => {
-  const copyTodo = getState().todoListItems.find((item) => item._id === id);
+  const items = [...getState().todoListItems];
+  const copyTodo = items.find((item) => item._id === id);
   const todo = { ...copyTodo };
   todo.completed = !todo.completed;
-  const index = getState().todoListItems.findIndex((item) => item._id === id);
+  const index = items.findIndex((item) => item._id === id);
   dispatch({
     type: TOGGLE_TODO,
     payload: {
@@ -44,4 +46,20 @@ export const toggleTodo = (id) => (dispatch, getState) => {
     },
   });
   dispatch(toggleSelectedTodoListItem(id));
+};
+
+export const updateTodo = (id, newText) => (dispatch, getState) => {
+  const items = [...getState().todoListItems];
+  const index = items.findIndex((item) => item._id === id);
+  const copyTodo = items.find((item) => item._id === id);
+  const todo = { ...copyTodo };
+  todo.text = newText;
+  dispatch({
+    type: UPDATE_TODO,
+    payload: {
+      todo,
+      index,
+    },
+  });
+  dispatch(updateSelectedTodoListItem(id, newText));
 };

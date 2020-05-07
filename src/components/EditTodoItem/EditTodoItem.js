@@ -1,26 +1,30 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import useInput from '../../hooks/useInput';
+import { updateTodo } from '../../actions/todolistitem';
 import './EditTodoItem.css';
 
 const EditTodoItem = (props) => {
   const [text, changeText, resetText] = useInput(props.item.text);
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(text);
+    props.updateTodo(props.item._id, text);
+    resetText();
+    props.toggleEdit();
   };
   return (
     <div className='EditTodoItem'>
       <form onSubmit={submitHandler}>
         <input type='text' value={text} onChange={changeText} />
         <div>
-          <button onClick={props.toggleEdit} className='button'>
+          <input type='submit' value='Save' />
+          <button onClick={props.toggleEdit} className='button' role='cancel'>
             Cancel
           </button>
-          <input type='submit' value='Save' />
         </div>
       </form>
     </div>
   );
 };
 
-export default EditTodoItem;
+export default connect(null, { updateTodo })(EditTodoItem);

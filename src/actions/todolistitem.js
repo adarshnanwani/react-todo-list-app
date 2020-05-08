@@ -85,8 +85,10 @@ export const toggleTodo = (id) => async (dispatch, getState) => {
     const todo = { ...copyTodo };
     todo.completed = !todo.completed;
     const index = items.findIndex((item) => item._id === id);
+
     const res = await axios.put(`/todos/${id}`, todo);
     const updatedTodo = res.data.data;
+
     dispatch({
       type: TOGGLE_TODO,
       payload: {
@@ -100,20 +102,28 @@ export const toggleTodo = (id) => async (dispatch, getState) => {
   }
 };
 
-export const updateTodo = (id, newText) => (dispatch, getState) => {
-  const items = [...getState().todoListItems];
-  const index = items.findIndex((item) => item._id === id);
-  const copyTodo = items.find((item) => item._id === id);
-  const todo = { ...copyTodo };
-  todo.text = newText;
-  dispatch({
-    type: UPDATE_TODO,
-    payload: {
-      todo,
-      index,
-    },
-  });
-  dispatch(updateSelectedTodoListItem(id, newText));
+export const updateTodo = (id, newText) => async (dispatch, getState) => {
+  try {
+    const items = [...getState().todoListItems];
+    const index = items.findIndex((item) => item._id === id);
+    const copyTodo = items.find((item) => item._id === id);
+    const todo = { ...copyTodo };
+    todo.text = newText;
+
+    const res = await axios.put(`/todos/${id}`, todo);
+    const updatedTodo = res.data.data;
+
+    dispatch({
+      type: UPDATE_TODO,
+      payload: {
+        updatedTodo,
+        index,
+      },
+    });
+    dispatch(updateSelectedTodoListItem(id, updatedTodo.text));
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const deleteTodoItemsByTodoListId = (todoListId) => (dispatch) => {

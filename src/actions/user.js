@@ -1,3 +1,5 @@
+import axios from '../axiosInstance';
+
 import {
   LOGIN_FAIL,
   LOGIN_SUCCESS,
@@ -10,11 +12,19 @@ import {
   LOGOUT,
 } from './types';
 
-export const userSignUp = () => (dispatch) => {
-  dispatch({
-    type: SIGN_UP_SUCCESS,
-    payload: '43524435ewrfdsgsafsdfas',
-  });
+export const userSignUp = (user) => async (dispatch) => {
+  try {
+    const res = await axios.post('/auth/register', user);
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload: res.data.token,
+    });
+  } catch (err) {
+    console.log(err);
+    dispatch({
+      type: SIGN_UP_FAIL,
+    });
+  }
 };
 
 export const userLogin = (email, password) => (dispatch) => {

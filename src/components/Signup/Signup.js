@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { userSignUp } from '../../actions/user';
 import useInput from '../../hooks/useInput';
 
 import './Signup.css';
 
-const Signup = () => {
+const Signup = (props) => {
   const [name, changeName, resetName] = useInput('');
   const [email, changeEmail, resetEmail] = useInput('');
   const [password, changePassword, resetPassword] = useInput('');
@@ -17,11 +19,10 @@ const Signup = () => {
     if (password !== cpassword) {
       setError(true);
     } else {
-      console.log({
+      props.userSignUp({
         name,
         email,
         password,
-        cpassword,
       });
       setError(false);
       resetName();
@@ -30,6 +31,10 @@ const Signup = () => {
       resetCpassword();
     }
   };
+
+  if (props.isAuthenticated) {
+    return <Redirect to='/dashboard' />;
+  }
 
   return (
     <div className='Signup'>
@@ -78,4 +83,8 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.user.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { userSignUp })(Signup);

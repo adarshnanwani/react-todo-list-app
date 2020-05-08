@@ -14,13 +14,26 @@ import {
   deleteFromSelectedTodoList,
   toggleSelectedTodoListItem,
   updateSelectedTodoListItem,
+  setSelectedTodoList,
 } from './selectedTodoList';
 
-export const getAllTodoItemsForUser = () => async (dispatch) => {
+export const getAllTodoItemsForUser = () => async (dispatch, getState) => {
   try {
     // dispatch GET_ALL_ITEMS_FOR_A_USER
+    dispatch({
+      type: GET_ALL_ITEMS_FOR_A_USER,
+    });
     // Call API to fetch all todos --- /todos/all
+    const res = await axios.get('/todos/all');
     // dispatch SET_ALL_ITEMS_FOR_A_USER with API response as payload
+    dispatch({
+      type: SET_ALL_ITEMS_FOR_A_USER,
+      payload: res.data.data,
+    });
+    if (res.data.data[0]) {
+      dispatch(setSelectedTodoList(res.data.data[0].todolist));
+    }
+
     // implement reducer for case SET_ALL_ITEMS_FOR_A_USER (like we did for todolistReducer)
     // call getAllTodoItemsForUser where appropriate
   } catch (err) {
@@ -28,21 +41,27 @@ export const getAllTodoItemsForUser = () => async (dispatch) => {
   }
 };
 
-export const addTodo = (text, todoListId) => (dispatch, getState) => {
-  axios.post(`/todos/${todoListId}`, { text });
-  const newTodo = {
-    text,
-    completed: false,
-    _id: v4(),
-    createdDate: new Date(),
-    todoListId,
-  };
-  dispatch({
-    type: ADD_TODO,
-    payload: newTodo,
-  });
-  if (getState().selectedTodoList.id === todoListId) {
-    dispatch(addToSelectedTodoList(newTodo));
+export const addTodo = (text, todoListId) => async (dispatch, getState) => {
+  try {
+    const res = await axios.post(`/todos/${todoListId}`, { text });
+    const todo = res.data.data;
+
+    const newTodo = {
+      text: todo.text,
+      completed: todo.completed,
+      _id: todo._id,
+      createdDate: todo.createdAt,
+      todolist: todo.todolist,
+    };
+    dispatch({
+      type: ADD_TODO,
+      payload: newTodo,
+    });
+    if (getState().selectedTodoList.id === todoListId) {
+      dispatch(addToSelectedTodoList(newTodo));
+    }
+  } catch (err) {
+    console.log(err);
   }
 };
 

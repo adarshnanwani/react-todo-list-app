@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 import { deleteTodoList, getTodoListsForUser } from '../../actions/todolist';
+import { getAllTodoItemsForUser } from '../../actions/todolistitem';
 import './ManageTodoLists.css';
 
 const ManageTodoLists = (props) => {
   let list;
   useEffect(() => {
     props.getTodoListsForUser();
+    props.getAllTodoItemsForUser();
   }, []);
   if (props.todolists.length === 0) {
     list = <li>Please add a todo list.</li>;
@@ -67,4 +69,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   deleteTodoList,
   getTodoListsForUser,
+  getAllTodoItemsForUser,
 })(ManageTodoLists);

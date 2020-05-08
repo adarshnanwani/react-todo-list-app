@@ -13,7 +13,9 @@ const TodoListItem = (props) => {
     <Fragment>
       <div>
         <span>{item.text}</span> -{' '}
-        <Moment format='DD/MMM/YYYY'>{item.createdDate.toString()}</Moment>
+        <Moment format='DD/MMM/YYYY'>
+          {item.createdAt && item.createdAt.toString()}
+        </Moment>
       </div>
       <div className='action-area'>
         <button

@@ -8,9 +8,7 @@ import {
 } from './types';
 
 export const setSelectedTodoList = (id) => (dispatch, getState) => {
-  const items = getState().todoListItems.filter(
-    (item) => item.todoListId === id
-  );
+  const items = getState().todoListItems.filter((item) => item.todolist === id);
   const name = { ...getState().todolists.find((item) => item._id === id) }.name;
   dispatch({
     type: SET_SELECTED_TODO_LIST,

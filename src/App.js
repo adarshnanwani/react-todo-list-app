@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import PrivateRoute from './components/routing/PrivateRoute';
 import Navbar from './components/Layout/Navbar';
 import Footer from './components/Layout/Footer';
 import Login from './components/Login/Login';
@@ -16,8 +17,11 @@ function App() {
         <Switch>
           <Route path='/' exact component={Login} />
           <Route path='/signup' component={Signup} />
-          <Route path='/dashboard' component={Dashboard} />
-          <Route path='/todolist/:todoListId' component={TodoList} />
+          <PrivateRoute path='/dashboard' component={Dashboard} />
+          <PrivateRoute
+            path='/todolist/:todoListId'
+            render={() => <TodoList />}
+          />
         </Switch>
       </section>
       <Footer />

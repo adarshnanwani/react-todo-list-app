@@ -38,19 +38,25 @@ export const addTodoList = (name) => async (dispatch) => {
   }
 };
 
-export const deleteTodoList = (_id) => (dispatch, getState) => {
-  dispatch({
-    type: DELETE_TODO_LIST,
-    payload: _id,
-  });
+export const deleteTodoList = (_id) => async (dispatch, getState) => {
+  try {
+    await axios.delete(`/todolist/${_id}`);
 
-  dispatch(deleteTodoItemsByTodoListId(_id));
+    dispatch({
+      type: DELETE_TODO_LIST,
+      payload: _id,
+    });
 
-  const currentState = { ...getState() };
-  if (currentState.selectedTodoList.id === _id) {
-    dispatch(clearTodoListItems());
-    if (currentState.todolists.length > 0) {
-      dispatch(setSelectedTodoList(currentState.todolists[0]._id));
+    dispatch(deleteTodoItemsByTodoListId(_id));
+
+    const currentState = { ...getState() };
+    if (currentState.selectedTodoList.id === _id) {
+      dispatch(clearTodoListItems());
+      if (currentState.todolists.length > 0) {
+        dispatch(setSelectedTodoList(currentState.todolists[0]._id));
+      }
     }
+  } catch (err) {
+    console.log(err);
   }
 };

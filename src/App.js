@@ -7,9 +7,14 @@ import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
 import Dashboard from './components/Dashboard/Dashboard';
 import TodoList from './components/TodoList/TodoList';
+import store from './store';
+import { authenticateUser } from './actions/user';
 import './App.css';
 
 function App() {
+  if (localStorage.token) {
+    store.dispatch(authenticateUser(localStorage.token));
+  }
   return (
     <Fragment>
       <Navbar />
@@ -18,10 +23,7 @@ function App() {
           <Route path='/' exact component={Login} />
           <Route path='/signup' component={Signup} />
           <PrivateRoute path='/dashboard' component={Dashboard} />
-          <PrivateRoute
-            path='/todolist/:todoListId'
-            render={() => <TodoList />}
-          />
+          <PrivateRoute path='/todolist/:todoListId' component={TodoList} />
         </Switch>
       </section>
       <Footer />

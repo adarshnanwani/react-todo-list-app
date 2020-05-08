@@ -4,6 +4,12 @@ import thunk from 'redux-thunk';
 import rootReducer from './reducers/index';
 
 const initialState = {
+  user: {
+    token: null,
+    isAuthenticated: null,
+    loading: true,
+    user: null,
+  },
   todolists: [
     {
       _id: '1',
@@ -62,5 +68,18 @@ const store = createStore(
   initialState,
   composeWithDevTools(applyMiddleware(...middleware))
 );
+
+store.subscribe(() => {
+  const previousState = initialState;
+  const currentState = store.getState();
+  // compare the token
+  if (previousState.user.token !== currentState.user.token) {
+    if (currentState.user.token) {
+      localStorage.setItem('token', currentState.user.token);
+    } else {
+      localStorage.removeItem('token');
+    }
+  }
+});
 
 export default store;

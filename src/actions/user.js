@@ -42,6 +42,13 @@ export const userLogin = (email, password) => async (dispatch) => {
   }
 };
 
+export const authenticateUser = (token) => (dispatch) => {
+  dispatch({
+    type: LOGIN_SUCCESS,
+    payload: token,
+  });
+};
+
 export const loadUser = () => (dispatch) => {
   dispatch({
     type: GET_USER_DATA,

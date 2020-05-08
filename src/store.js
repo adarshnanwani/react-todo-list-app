@@ -69,9 +69,14 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(...middleware))
 );
 
+// set the currentState for first run of the app
+let currentState = initialState;
+
 store.subscribe(() => {
-  const previousState = initialState;
-  const currentState = store.getState();
+  // store previous currentState in a object
+  const previousState = currentState;
+  // get current value for the state
+  currentState = store.getState();
   // compare the token
   if (previousState.user.token !== currentState.user.token) {
     if (currentState.user.token) {

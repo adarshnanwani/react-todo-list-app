@@ -63,3 +63,8 @@ export const loadUser = () => (dispatch) => {
     },
   });
 };
+
+
+export const logoutUser = () => (dispatch) => {
+  dispatch({type: LOGOUT})
+}

@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { logoutUser } from '../../actions/user';
 
 const Navbar = (props) => {
   const publicLinks = (
@@ -17,7 +18,9 @@ const Navbar = (props) => {
   const privateLinks = (
     <Fragment>
       <li>
-        <Link to='/'>Logout</Link>
+        <a href='#!' role='button' onClick={() => props.logoutUser()}>
+          Logout
+        </a>
       </li>
     </Fragment>
   );
@@ -36,4 +39,4 @@ const mapStateToProps = (state) => ({
   isAuth: state.user.isAuthenticated,
 });
 
-export default connect(mapStateToProps)(Navbar);
+export default connect(mapStateToProps, { logoutUser })(Navbar);

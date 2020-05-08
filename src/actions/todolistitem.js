@@ -65,12 +65,17 @@ export const addTodo = (text, todoListId) => async (dispatch, getState) => {
   }
 };
 
-export const deleteTodo = (id) => (dispatch) => {
-  dispatch({
-    type: DELETE_TODO,
-    payload: id,
-  });
-  dispatch(deleteFromSelectedTodoList(id));
+export const deleteTodo = (id) => async (dispatch) => {
+  try {
+    await axios.delete(`/todos/${id}`);
+    dispatch({
+      type: DELETE_TODO,
+      payload: id,
+    });
+    dispatch(deleteFromSelectedTodoList(id));
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const toggleTodo = (id) => (dispatch, getState) => {
@@ -106,8 +111,12 @@ export const updateTodo = (id, newText) => (dispatch, getState) => {
 };
 
 export const deleteTodoItemsByTodoListId = (todoListId) => (dispatch) => {
-  dispatch({
-    type: DELETE_TODOS_FROM_A_TODO_LIST,
-    payload: todoListId,
-  });
+  try {
+    dispatch({
+      type: DELETE_TODOS_FROM_A_TODO_LIST,
+      payload: todoListId,
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };

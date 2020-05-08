@@ -1,10 +1,13 @@
 import { v4 } from 'uuid';
+import axios from '../axiosInstance';
 import {
   ADD_TODO,
   DELETE_TODO,
   TOGGLE_TODO,
   UPDATE_TODO,
   DELETE_TODOS_FROM_A_TODO_LIST,
+  GET_ALL_ITEMS_FOR_A_USER,
+  SET_ALL_ITEMS_FOR_A_USER,
 } from './types';
 import {
   addToSelectedTodoList,
@@ -13,7 +16,20 @@ import {
   updateSelectedTodoListItem,
 } from './selectedTodoList';
 
+export const getAllTodoItemsForUser = () => async (dispatch) => {
+  try {
+    // dispatch GET_ALL_ITEMS_FOR_A_USER
+    // Call API to fetch all todos --- /todos/all
+    // dispatch SET_ALL_ITEMS_FOR_A_USER with API response as payload
+    // implement reducer for case SET_ALL_ITEMS_FOR_A_USER (like we did for todolistReducer)
+    // call getAllTodoItemsForUser where appropriate
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const addTodo = (text, todoListId) => (dispatch, getState) => {
+  axios.post(`/todos/${todoListId}`, { text });
   const newTodo = {
     text,
     completed: false,
@@ -70,9 +86,7 @@ export const updateTodo = (id, newText) => (dispatch, getState) => {
   dispatch(updateSelectedTodoListItem(id, newText));
 };
 
-export const deleteTodoItemsByTodoListId = (todoListId) => (
-  dispatch
-) => {
+export const deleteTodoItemsByTodoListId = (todoListId) => (dispatch) => {
   dispatch({
     type: DELETE_TODOS_FROM_A_TODO_LIST,
     payload: todoListId,

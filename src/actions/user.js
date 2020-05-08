@@ -16,7 +16,7 @@ export const userSignUp = (user) => async (dispatch) => {
   try {
     const res = await axios.post('/auth/register', user);
     dispatch({
-      type: LOGIN_SUCCESS,
+      type: SIGN_UP_SUCCESS,
       payload: res.data.token,
     });
   } catch (err) {
@@ -37,7 +37,7 @@ export const userLogin = (email, password) => async (dispatch) => {
   } catch (err) {
     console.log(err);
     dispatch({
-      type: SIGN_UP_FAIL,
+      type: LOGIN_FAIL,
     });
   }
 };

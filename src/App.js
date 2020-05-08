@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import PrivateRoute from './components/routing/PrivateRoute';
 import Navbar from './components/Layout/Navbar';
@@ -8,13 +8,17 @@ import Signup from './components/Signup/Signup';
 import Dashboard from './components/Dashboard/Dashboard';
 import TodoList from './components/TodoList/TodoList';
 import store from './store';
-import { authenticateUser } from './actions/user';
+import { authenticateUser, loadUser } from './actions/user';
 import './App.css';
 
 function App() {
   if (localStorage.token) {
     store.dispatch(authenticateUser(localStorage.token));
   }
+
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
   return (
     <Fragment>
       <Navbar />

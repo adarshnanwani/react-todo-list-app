@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
+import axios from './axiosInstance';
 import rootReducer from './reducers/index';
 
 const initialState = {
@@ -81,8 +82,12 @@ store.subscribe(() => {
   if (previousState.user.token !== currentState.user.token) {
     if (currentState.user.token) {
       localStorage.setItem('token', currentState.user.token);
+      axios.defaults.headers.common[
+        'Authorization'
+      ] = `Bearer ${currentState.user.token}`;
     } else {
       localStorage.removeItem('token');
+      delete axios.defaults.headers.common['Authorization'];
     }
   }
 });

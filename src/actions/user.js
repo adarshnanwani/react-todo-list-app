@@ -19,6 +19,8 @@ export const userSignUp = (user) => async (dispatch) => {
       type: SIGN_UP_SUCCESS,
       payload: res.data.token,
     });
+    // Get user data now that we have got the token
+    dispatch(loadUser());
   } catch (err) {
     console.log(err);
     dispatch({
@@ -34,6 +36,8 @@ export const userLogin = (email, password) => async (dispatch) => {
       type: LOGIN_SUCCESS,
       payload: res.data.token,
     });
+    // Get user data now that we have got the token
+    dispatch(loadUser());
   } catch (err) {
     console.log(err);
     dispatch({
@@ -49,22 +53,28 @@ export const authenticateUser = (token) => (dispatch) => {
   });
 };
 
-export const loadUser = () => (dispatch) => {
-  dispatch({
-    type: GET_USER_DATA,
-  });
-  dispatch({
-    type: SET_USER_DATA,
-    payload: {
-      name: 'John Doe',
-      email: 'john@gmail.com',
-      _id: 'fsadasefdxz5678',
-      defaultList: 'tryewrqetrs432',
-    },
-  });
+export const loadUser = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: GET_USER_DATA,
+    });
+    const res = await axios.get('/auth/me');
+    console.log(res);
+    const user = res.data.data;
+    dispatch({
+      type: SET_USER_DATA,
+      payload: {
+        name: user.name,
+        email: user.email,
+        _id: user._id,
+        defaultList: user.defaultList,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
-
 export const logoutUser = () => (dispatch) => {
-  dispatch({type: LOGOUT})
-}
+  dispatch({ type: LOGOUT });
+};

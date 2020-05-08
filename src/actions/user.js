@@ -27,12 +27,19 @@ export const userSignUp = (user) => async (dispatch) => {
   }
 };
 
-export const userLogin = (email, password) => (dispatch) => {
-  console.log('From User actions', email, password);
-  dispatch({
-    type: LOGIN_SUCCESS,
-    payload: '43524435ewrfdsgsafsdfas',
-  });
+export const userLogin = (email, password) => async (dispatch) => {
+  try {
+    const res = await axios.post('/auth/login', { email, password });
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload: res.data.token,
+    });
+  } catch (err) {
+    console.log(err);
+    dispatch({
+      type: SIGN_UP_FAIL,
+    });
+  }
 };
 
 export const loadUser = () => (dispatch) => {

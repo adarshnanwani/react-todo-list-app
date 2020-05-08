@@ -4,6 +4,7 @@ import {
   DELETE_FROM_SELECTED_TODO_LIST,
   TOGGLE_SELECTED_TODO_LIST_ITEM,
   UPDATE_SELECTED_TODO_LIST_ITEM,
+  CLEAR_SELECTED_TODO_LIST_ITEMS,
 } from '../actions/types';
 
 const initialState = {
@@ -48,6 +49,11 @@ const selectedTodoListReducer = (state = initialState, action) => {
       return {
         ...state,
         items: copyItemsArr,
+      };
+    case CLEAR_SELECTED_TODO_LIST_ITEMS:
+      return {
+        ...state,
+        items: [],
       };
     default:
       return state;

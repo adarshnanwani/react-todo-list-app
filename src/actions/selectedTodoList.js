@@ -4,6 +4,7 @@ import {
   DELETE_FROM_SELECTED_TODO_LIST,
   UPDATE_SELECTED_TODO_LIST_ITEM,
   TOGGLE_SELECTED_TODO_LIST_ITEM,
+  CLEAR_SELECTED_TODO_LIST_ITEMS,
 } from './types';
 
 export const setSelectedTodoList = (id) => (dispatch, getState) => {
@@ -61,5 +62,11 @@ export const updateSelectedTodoListItem = (id, newText) => (
       todo,
       index,
     },
+  });
+};
+
+export const clearTodoListItems = () => (dispatch) => {
+  dispatch({
+    type: CLEAR_SELECTED_TODO_LIST_ITEMS,
   });
 };

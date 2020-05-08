@@ -1,5 +1,11 @@
 import { v4 } from 'uuid';
-import { ADD_TODO, DELETE_TODO, TOGGLE_TODO, UPDATE_TODO } from './types';
+import {
+  ADD_TODO,
+  DELETE_TODO,
+  TOGGLE_TODO,
+  UPDATE_TODO,
+  DELETE_TODOS_FROM_A_TODO_LIST,
+} from './types';
 import {
   addToSelectedTodoList,
   deleteFromSelectedTodoList,
@@ -62,4 +68,13 @@ export const updateTodo = (id, newText) => (dispatch, getState) => {
     },
   });
   dispatch(updateSelectedTodoListItem(id, newText));
+};
+
+export const deleteTodoItemsByTodoListId = (todoListId) => (
+  dispatch
+) => {
+  dispatch({
+    type: DELETE_TODOS_FROM_A_TODO_LIST,
+    payload: todoListId,
+  });
 };

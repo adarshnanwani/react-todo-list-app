@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
-import { deleteTodoList } from '../../actions/todolist';
+import { deleteTodoList, getTodoListsForUser } from '../../actions/todolist';
 import './ManageTodoLists.css';
 
 const ManageTodoLists = (props) => {
   let list;
+  useEffect(() => {
+    props.getTodoListsForUser();
+  }, []);
   if (props.todolists.length === 0) {
     list = <li>Please add a todo list.</li>;
   } else {
@@ -20,7 +23,9 @@ const ManageTodoLists = (props) => {
         <li key={list._id}>
           <div>
             <span>{listName}</span> -{' '}
-            <Moment format='DD/MMM/YYYY'>{list.createdDate.toString()}</Moment>
+            <Moment format='DD/MMM/YYYY'>
+              {list.createdAt && list.createdAt.toString()}
+            </Moment>
           </div>
           <div className='action-area'>
             <Link
@@ -59,4 +64,7 @@ const mapStateToProps = (state) => ({
   todolists: state.todolists,
 });
 
-export default connect(mapStateToProps, { deleteTodoList })(ManageTodoLists);
+export default connect(mapStateToProps, {
+  deleteTodoList,
+  getTodoListsForUser,
+})(ManageTodoLists);

@@ -1,7 +1,24 @@
-import { ADD_TODO_LIST, DELETE_TODO_LIST } from './types';
+import {
+  ADD_TODO_LIST,
+  DELETE_TODO_LIST,
+  GET_ALL_TODO_LISTS,
+  SET_ALL_TODO_LISTS,
+} from './types';
+import { v4 } from 'uuid';
 import { deleteTodoItemsByTodoListId } from './todolistitem';
 import { clearTodoListItems, setSelectedTodoList } from './selectedTodoList';
-import { v4 } from 'uuid';
+import axios from '../axiosInstance';
+
+export const getTodoListsForUser = () => async (dispatch) => {
+  dispatch({
+    type: GET_ALL_TODO_LISTS,
+  });
+  const res = await axios.get('/todolist');
+  dispatch({
+    type: SET_ALL_TODO_LISTS,
+    payload: res.data.data,
+  });
+};
 
 export const addTodoList = (name) => (dispatch) => {
   const newTodoList = {

@@ -78,20 +78,26 @@ export const deleteTodo = (id) => async (dispatch) => {
   }
 };
 
-export const toggleTodo = (id) => (dispatch, getState) => {
-  const items = [...getState().todoListItems];
-  const copyTodo = items.find((item) => item._id === id);
-  const todo = { ...copyTodo };
-  todo.completed = !todo.completed;
-  const index = items.findIndex((item) => item._id === id);
-  dispatch({
-    type: TOGGLE_TODO,
-    payload: {
-      todo,
-      index,
-    },
-  });
-  dispatch(toggleSelectedTodoListItem(id));
+export const toggleTodo = (id) => async (dispatch, getState) => {
+  try {
+    const items = [...getState().todoListItems];
+    const copyTodo = items.find((item) => item._id === id);
+    const todo = { ...copyTodo };
+    todo.completed = !todo.completed;
+    const index = items.findIndex((item) => item._id === id);
+    const res = await axios.put(`/todos/${id}`, todo);
+    const updatedTodo = res.data.data;
+    dispatch({
+      type: TOGGLE_TODO,
+      payload: {
+        updatedTodo,
+        index,
+      },
+    });
+    dispatch(toggleSelectedTodoListItem(id));
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const updateTodo = (id, newText) => (dispatch, getState) => {

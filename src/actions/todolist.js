@@ -20,16 +20,22 @@ export const getTodoListsForUser = () => async (dispatch) => {
   });
 };
 
-export const addTodoList = (name) => (dispatch) => {
-  const newTodoList = {
-    name,
-    createdDate: new Date(),
-    _id: v4(),
-  };
-  dispatch({
-    type: ADD_TODO_LIST,
-    payload: newTodoList,
-  });
+export const addTodoList = (name) => async (dispatch) => {
+  try {
+    const res = await axios.post(`/todolist/${name}`);
+    const list = res.data.data;
+    const newTodoList = {
+      name: list.name,
+      createdDate: list.createdAt,
+      _id: list._id,
+    };
+    dispatch({
+      type: ADD_TODO_LIST,
+      payload: newTodoList,
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const deleteTodoList = (_id) => (dispatch, getState) => {
